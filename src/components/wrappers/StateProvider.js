@@ -13,29 +13,23 @@ class StateProvider extends Component {
             filter: FILTER_ALL,
             list: getAll(),
             priority: 'Medium',
-            dueDate: '' // Add due date state
+            sortOption: 'dueDateAsc', // Default sorting option
         };
     }
 
     render() {
         let children = wrapChildrenWith(this.props.children, {
             data: this.state,
-            actions: objectWithOnly(this, [
-                'addNew',
-                'changeFilter',
-                'changeStatus',
-                'changeMode',
-                'setSearchQuery',
-                'setPriority',
-                'setDueDate' // Add setDueDate action
-            ])
+            actions: objectWithOnly(this, ['addNew', 'changeFilter', 'changeStatus', 'changeMode', 'setSearchQuery', 'setPriority', 'setSortBy'])
         });
 
         return <div>{children}</div>;
     }
 
     addNew(text, priority, dueDate) {
-        let updatedList = addToList(this.state.list, { text, completed: false, priority, dueDate }); // Add due date to the task
+        const { priority: currentPriority } = this.state;
+        let updatedList = addToList(this.state.list, { text, completed: false, priority: currentPriority, dueDate });
+
         this.setState({ list: updatedList });
     }
 
@@ -45,6 +39,7 @@ class StateProvider extends Component {
 
     changeStatus(itemId, completed) {
         const updatedList = updateStatus(this.state.list, itemId, completed);
+
         this.setState({ list: updatedList });
     }
 
@@ -60,8 +55,25 @@ class StateProvider extends Component {
         this.setState({ priority });
     }
 
-    setDueDate(dueDate) {
-        this.setState({ dueDate }); // Set the due date in state
+    setSortBy(sortOption) {
+        this.setState({ sortOption }, this.sortList); // Set sorting option and call sortList
+    }
+
+    sortList() {
+        const { sortOption, list } = this.state;
+
+        let sortedList = [...list]; // Create a shallow copy of the list
+
+        if (sortOption === 'dueDateAsc') {
+            sortedList.sort((a, b) => new Date(a.dueDate) - new Date(b.dueDate));
+        } else if (sortOption === 'dueDateDesc') {
+            sortedList.sort((a, b) => new Date(b.dueDate) - new Date(a.dueDate));
+        } else if (sortOption === 'priority') {
+            const priorityOrder = ['High', 'Medium', 'Low']; // Order for priority
+            sortedList.sort((a, b) => priorityOrder.indexOf(a.priority) - priorityOrder.indexOf(b.priority));
+        }
+
+        this.setState({ list: sortedList });
     }
 }
 

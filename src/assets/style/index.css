@@ -227,3 +227,12 @@ footer .buttons {
     color: #6c757d;
     font-style: italic;
 }
+
+.sorting-options {
+    margin-bottom: 20px;
+}
+
+.sorting-options select {
+    width: 200px;
+    padding: 5px;
+}
