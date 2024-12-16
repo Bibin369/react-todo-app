@@ -124,3 +124,100 @@ footer .buttons {
     border: 1px solid rgba(229, 229, 229, 0.5);
     color: #888;
 }
+
+.confirmation-dialog {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #fff;
+    padding: 25px 35px;
+    border-radius: 8px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    z-index: 1000;
+    width: 100%;
+    max-width: 400px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    font-family: 'Roboto', sans-serif;
+}
+
+.confirmation-dialog .text-dialog {
+    margin-bottom: 20px;
+    font-size: 16px;
+    color: #333;
+}
+
+.confirmation-dialog button {
+    background-color: #007BFF;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    margin: 5px;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.confirmation-dialog button:hover {
+    background-color: #0056b3;
+    transform: scale(1.05);
+}
+
+.confirmation-dialog button:focus {
+    outline: none;
+}
+
+.confirmation-dialog .cancel-btn {
+    background-color: #6c757d;
+}
+
+.confirmation-dialog .cancel-btn:hover {
+    background-color: #5a6268;
+}
+
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.3);
+    z-index: 999;
+}
+
+/* General styling for priority */
+.priority {
+    font-weight: bold;
+    margin-left: 10px;
+    padding: 2px 6px;
+    border-radius: 4px;
+    text-transform: capitalize; /* Capitalize the priority */
+}
+
+/* High priority styling */
+.priority.high {
+    color: white; /* White text for better contrast */
+    background-color: red; /* Red background for high priority */
+}
+
+/* Medium priority styling */
+.priority.medium {
+    color: white; /* White text for better contrast */
+    background-color: orange; /* Orange background for medium priority */
+}
+
+/* Low priority styling */
+.priority.low {
+    color: white; /* White text for better contrast */
+    background-color: green; /* Green background for low priority */
+}
+
+/* Optional: Add hover effect for better interactivity */
+.priority:hover {
+    opacity: 0.8; /* Slight transparency on hover */
+}
+

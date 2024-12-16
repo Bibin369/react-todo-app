@@ -1,23 +1,18 @@
-import React, {Component} from 'react';
+import React from 'react';
 
-class CheckBox extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            checked: this.props.checked
-        };
-    }
+export default function CheckBox(props) {
+    const { tempChecked, onTempChange } = props;
 
-    handleChange(e) {
-        const {checked} = e.target;
+    const handleChange = (e) => {
+        const value = e.target.checked;
+        onTempChange(value); // Notify parent about the temporary state change
+    };
 
-        this.setState({checked});
-        this.props.onChange(checked);
-    }
-
-    render() {
-        return (<input type="checkbox" checked={this.state.checked} onChange={this.handleChange.bind(this)}/>);
-    }
+    return (
+        <input
+            type="checkbox"
+            checked={tempChecked}  // Use the temporary checked state passed from the parent
+            onChange={handleChange}
+        />
+    );
 }
-
-export default CheckBox;
