@@ -2,7 +2,7 @@ import React from 'react';
 import enhance from '../hoc/wrapInputBox';  
 
 function InputBox(props) {
-    const { value, handleChange, handleKeyUp, priority, handlePriorityChange, setPriority } = props;
+    const { value, handleChange, handleKeyUp, priority, handlePriorityChange, dueDate, handleDueDateChange } = props;
 
     return (
         <div>
@@ -17,16 +17,21 @@ function InputBox(props) {
             />
             <select
                 value={priority}
-                onChange={(e) => {
-                    handlePriorityChange(e);
-                    setPriority(e.target.value); // Update priority state
-                }}
+                onChange={handlePriorityChange}
                 className="form-control priority-select"
             >
                 <option value="High">High</option>
                 <option value="Medium">Medium</option>
                 <option value="Low">Low</option>
             </select>
+
+            {/* Due Date Picker */}
+            <input
+                type="date"
+                value={dueDate}
+                onChange={handleDueDateChange}
+                className="form-control due-date-select"
+            />
         </div>
     );
 }

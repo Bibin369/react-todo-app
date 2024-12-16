@@ -12,23 +12,30 @@ class StateProvider extends Component {
             mode: MODE_CREATE,
             filter: FILTER_ALL,
             list: getAll(),
-            priority: 'Medium' // Add priority state
+            priority: 'Medium',
+            dueDate: '' // Add due date state
         };
     }
 
     render() {
         let children = wrapChildrenWith(this.props.children, {
             data: this.state,
-            actions: objectWithOnly(this, ['addNew', 'changeFilter', 'changeStatus', 'changeMode', 'setSearchQuery', 'setPriority'])
+            actions: objectWithOnly(this, [
+                'addNew',
+                'changeFilter',
+                'changeStatus',
+                'changeMode',
+                'setSearchQuery',
+                'setPriority',
+                'setDueDate' // Add setDueDate action
+            ])
         });
 
         return <div>{children}</div>;
     }
 
-    addNew(text) {
-        const { priority } = this.state; // Use the current priority state
-        let updatedList = addToList(this.state.list, { text, completed: false, priority }); // Add priority to the new task
-
+    addNew(text, priority, dueDate) {
+        let updatedList = addToList(this.state.list, { text, completed: false, priority, dueDate }); // Add due date to the task
         this.setState({ list: updatedList });
     }
 
@@ -38,7 +45,6 @@ class StateProvider extends Component {
 
     changeStatus(itemId, completed) {
         const updatedList = updateStatus(this.state.list, itemId, completed);
-
         this.setState({ list: updatedList });
     }
 
@@ -51,7 +57,11 @@ class StateProvider extends Component {
     }
 
     setPriority(priority) {
-        this.setState({ priority }); // Set the priority in state
+        this.setState({ priority });
+    }
+
+    setDueDate(dueDate) {
+        this.setState({ dueDate }); // Set the due date in state
     }
 }
 

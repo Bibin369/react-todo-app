@@ -221,3 +221,9 @@ footer .buttons {
     opacity: 0.8; /* Slight transparency on hover */
 }
 
+.due-date {
+    margin-left: 15px;
+    font-size: 14px;
+    color: #6c757d;
+    font-style: italic;
+}

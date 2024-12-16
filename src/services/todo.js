@@ -10,19 +10,22 @@ export function getAll() {
             id: 1,
             text: 'Learn Javascript',
             completed: false,
-            priority: 'High' // Default priority
+            priority: 'High', // Default priority
+            dueDate: '2024-12-25' // Example due date
         },
         {
             id: 2,
             text: 'Learn React',
             completed: false,
-            priority: 'Medium' // Default priority
+            priority: 'Medium', // Default priority
+            dueDate: '2024-12-30' // Example due date
         },
         {
             id: 3,
             text: 'Build a React App',
             completed: false,
-            priority: 'Low' // Default priority
+            priority: 'Low', // Default priority
+            dueDate: '2025-01-05' // Example due date
         }
     ]
 }
@@ -63,8 +66,9 @@ function getNextId() {
 export function addToList(list, data) {
     let item = Object.assign({
         id: getNextId(),
-        completed: false, // default value for completed
-        priority: 'Medium' // Default priority value
+        completed: false, // Default value for completed
+        priority: 'Medium', // Default priority value
+        dueDate: null // Default value for dueDate (null if not provided)
     }, data);
 
     return list.concat([item]);
